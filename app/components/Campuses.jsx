@@ -10,14 +10,14 @@ class Campuses extends React.Component {
     super(props);
   }
 
-  componentDidMount() {
-    this.props.getCampuses()
-  }
+  // componentDidMount() {
+  //   this.props.getCampuses()
+  // }
 
   render() {
     return (<div className="container" > {
       this.props.campuses.map((campus, i) => {
-        return <Card type="campus" key={i} item={campus} />
+        return <Card type="campuses" key={i} item={campus} />
       })
     } </div>
     )

@@ -8,14 +8,16 @@ class Students extends React.Component {
     super(props);
   }
 
-  componentDidMount() {
-    this.props.getStudents()
-  }
+  // componentDidMount() {
+  //   this.props.getStudents()
+  // }
 
   render() {
     return (<div className="container" > {
       this.props.students.map((student, i) => {
-        return <Card type="student" modalOpen={this.props.modalState} toggleModal={this.props.toggleModal} key={i} item={student} />
+        console.log(student.name);
+        return <Card setCurrentStudent={this.props.setCurrentStudent} type="students" key={i} item={student} />
+
       })
     }
     </div>
@@ -27,14 +29,13 @@ class Students extends React.Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     // You can now say this.props.students
-    students: state.students,
-    modalState: state.modalState
+    students: state.students
   }
 };
 const mapDispatchToProps = (dispatch) => {
   return {
     getStudents: () => dispatch(action.fetchStudents()),
-    toggleModal: () => dispatch(action.toggleModal())
+    
   };
 }
 

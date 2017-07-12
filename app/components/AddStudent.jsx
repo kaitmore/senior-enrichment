@@ -2,12 +2,11 @@ import React, {
   Component
 } from 'react';
 
-import Modal from 'react-modal';
-
-const AddStudent = () => {
-  return (< Modal isOpen={true} contentLabel="Example Modal" >
-    < input type="text" name="studentName" />
-  </Modal>)
-
+import { Button, Modal } from 'react-bootstrap';
+class AddStudent extends React.Component {
+  render() {
+    return (<h1>AddStudent</h1>
+    )
+  }
 }
 export default AddStudent;

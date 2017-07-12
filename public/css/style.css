@@ -50,7 +50,7 @@ nav ul {
 
 nav ul li a {
   margin: 20px;
-  padding: 2px;
+  padding-bottom: 6px;
   border: 1px solid transparent;
   transition: border 0.5s ease-in;
   letter-spacing: 3px;
@@ -61,12 +61,29 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-  border-bottom: 1px solid white;
+  color: white;
+  text-decoration: none;
+  border-bottom: 1px solid white
+}
+
+a:focus {
+  outline: none;
+  text-decoration: none;
+}
+
+nav ul li a:active {
+  color: white;
+  text-decoration: none;
+  border: none;
+}
+
+nav ul li a:visited {
+  color: white;
+  border: none;
+  text-decoration: none;
 }
 
 .card {
-  width: 200px;
-  height: 275px;
   letter-spacing: 1px;
   font-size: 14px;
   background: white;
@@ -115,6 +132,7 @@ p.name {
   cursor: pointer;
   font-weight: bold;
   color: #F95759;
+  outline: none;
   transition: all 1s;
 }
 
