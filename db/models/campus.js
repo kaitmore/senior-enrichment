@@ -5,7 +5,10 @@ var db = require('../index.js')
 
 var Campus = db.define('campus', {
   name: Sequelize.STRING,
-  image: Sequelize.STRING
+  picture: {
+    type: Sequelize.STRING,
+    defaultValue: './jupiter.jpg'
+  }
 });
 
 module.exports = Campus;

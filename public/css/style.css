@@ -17,6 +17,17 @@ h1 {
   letter-spacing: 5px;
 }
 
+a {
+  color: #F95759;
+  font-weight: bold;
+}
+
+a:hover {
+  color: #420093;
+  font-weight: bold;
+  text-decoration: none;
+}
+
 .header {
   border-top: 6px solid black;
   margin: 0;
@@ -27,7 +38,6 @@ h1 {
   align-items: center;
   background: linear-gradient(135deg, #22004c 13%, #420093 38%, #af0078 74%, #fc5555 100%);
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  box-shadow: -1px 10px 53px 0px rgba(0, 0, 0, 0.75);
 }
 
 .title {
@@ -71,6 +81,13 @@ a:focus {
   text-decoration: none;
 }
 
+.breadcrumbs {
+  background: #000;
+  width: 100vw;
+  height: 40px;
+  box-shadow: -1px 10px 53px 0px rgba(0, 0, 0, 0.75);
+}
+
 nav ul li a:active {
   color: white;
   text-decoration: none;
@@ -84,6 +101,9 @@ nav ul li a:visited {
 }
 
 .card {
+  margin: 25px;
+  width: 225px;
+  height: 300px;
   letter-spacing: 1px;
   font-size: 14px;
   background: white;
@@ -107,16 +127,33 @@ p.name {
   font-size: 20px;
 }
 
+.backlink {
+  display: inline-block;
+}
+
+.back {
+  margin-left: 26%;
+  padding: 15px;
+}
+
 .container {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
   align-content: center;
   align-items: center;
-  margin: 50px;
+  margin: 0 50px;
 }
 
 .profile-pic {
-  height: 100px;
+  height: 125px;
+  border: 2px solid grey;
+  border-radius: 50%;
+  margin: 10px
+}
+
+.profile-pic-lg {
+  height: 200px;
   border: 2px solid grey;
   border-radius: 50%;
   margin: 10px
@@ -134,8 +171,77 @@ p.name {
   color: #F95759;
   outline: none;
   transition: all 1s;
+  display: inline;
+}
+
+.dropdown {
+  display: inline;
 }
 
 .card-btn:hover {
   border: 1px solid #F95759;
+  display: inline;
+}
+
+.detail-card {
+  width: 50vw;
+  letter-spacing: 1px;
+  font-size: 14px;
+  background: white;
+  border: 1px solid lightgrey;
+  padding: 20px;
+  border-radius: 20px;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: space-around;
+  text-align: center;
+  text-transform: uppercase;
+  box-shadow: -1px 10px 53px -21px rgba(0, 0, 0, 0.75);
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-card {
+  width: 40vw;
+  letter-spacing: 1px;
+  font-size: 14px;
+  background: white;
+  border: 1px solid lightgrey;
+  padding: 20px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  justify-content: space-around;
+  text-align: center;
+  text-transform: uppercase;
+  box-shadow: -1px 10px 53px -21px rgba(0, 0, 0, 0.75);
+}
+
+ul.student-list {
+  text-align: left;
+  list-style: none;
+}
+
+.glyphicon {
+    padding: 10px;
+    font-size: 15px;
+}
+
+.wrapper {
+  margin-top: 40px;
+}
+
+.input-control {
+  display: block;
+  padding: 10px;
+  font-size: 20px;
+  outline: none;
+  margin: 10px;
+  width: 100%;
 }

@@ -3,23 +3,24 @@ import { connect } from 'react-redux';
 import * as action from './../actions';
 import Card from './Card';
 
-
-
 class Campuses extends React.Component {
   constructor(props) {
     super(props);
   }
 
-  // componentDidMount() {
-  //   this.props.getCampuses()
-  // }
+  componentDidMount() {
+    this.props.getCampuses()
+  }
 
   render() {
-    return (<div className="container" > {
-      this.props.campuses.map((campus, i) => {
-        return <Card type="campuses" key={i} item={campus} />
-      })
-    } </div>
+    return (<div className="wrapper">
+      <div className="container" >
+        {this.props.campuses.map((campus, i) => {
+          return <Card type="campuses" key={i} item={campus} />
+        })
+        }
+      </div>
+    </div>
     )
   }
 
@@ -27,15 +28,14 @@ class Campuses extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    // You can now say this.props.books
     campuses: state.campuses
   }
 };
+
 const mapDispatchToProps = (dispatch) => {
   return {
     getCampuses: () => dispatch(action.fetchCampuses())
   };
 }
 
-// Use connect to put them together
 export default connect(mapStateToProps, mapDispatchToProps)(Campuses);

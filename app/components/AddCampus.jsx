@@ -2,18 +2,19 @@ import React, { Component } from 'react';
 
 import { Button, Modal } from 'react-bootstrap';
 
-import StudentForm from './StudentForm'
+import CampusForm from './CampusForm'
 
-const AddStudent = () => {
+const AddCampus = () => {
 
   return <div className="wrapper">
     <div className="container">
+
       <div className="add-card ">
-        <h3>Add a Student</h3>
-        <StudentForm />
+        <h3>Create a Campus</h3>
+        <CampusForm />
       </div >
     </div >
   </div >
 }
 
-export default AddStudent;
+export default AddCampus;

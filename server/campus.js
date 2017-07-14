@@ -35,19 +35,18 @@ router.post('/', function (req, res, next) {
 
 // PUT updated campus info (for one campus)
 router.put('/:id', function (req, res, next) {
+
   Campus.findById(req.params.id)
     .then((campus) => campus.update(req.body))
-    .then((campus) => campus)
+    .then((campus) => res.json(campus))
     .catch(next)
 })
 
 // DELETE a campus
 router.delete('/:id', function (req, res, next) {
-  Campus.delete({
-    where: {
-      id: req.params.id
-    }
-  }).then((num) => res.json(num))
+  Campus.findById(req.params.id)
+    .then((campus) => campus.destroy())
+    .then((campus) => res.json("Deleted"))
     .catch(next)
 })
 

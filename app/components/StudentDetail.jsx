@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as action from './../actions';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
+import StudentForm from './StudentForm';
 
 class StudentDetail extends React.Component {
     constructor(props) {
@@ -10,19 +11,31 @@ class StudentDetail extends React.Component {
 
     componentDidMount() {
         this.props.fetchStudentById(this.props.match.params.id);
+    }
 
+    renderDeets() {
+        const student = this.props.student;
+        return <div><h2>{student.name}</h2>
+            <p className="name"><Link to={`/campuses/${student.campusId}`}>{student.campus ? student.campus.name : "No"} Campus</Link></p>
+            <p>{student.email}</p>
+            <button onClick={() => this.props.editingToggle()} className="card-btn">Edit Student</button>
+            <button onClick={() => this.props.deleteStudent(this.props.match.params.id)} className="card-btn">Delete</button>
+        </div>
     }
 
     render() {
         const student = this.props.student;
 
         return (
-            <div className="container" >
-                <div className="card">
-                    <img src="https://cms-assets.tutsplus.com/uploads/users/107/posts/22984/image/25a-space-flat-icons-photoshop-saturn.jpg" className="profile-pic" />
-                    <p className="name">{student.name}</p>
-                    <p className="name">{student.campus.name} Campus</p>
-
+            <div className="wrapper" >
+                <div className="container" >
+                    <div className="detail-card">
+                        <img src={student.picture} className="profile-pic-lg" />
+                        {this.props.editing ? <StudentForm currentStudentId={student.id} /> : this.renderDeets()}
+                    </div>
+                </div>
+                <div className="back">
+                    <Link to={`/students`}><span className="glyphicon glyphicon-arrow-left" aria-hidden="true"></span><p className="backlink">Back to All Students</p></Link>
                 </div>
             </div>
         )
@@ -30,13 +43,16 @@ class StudentDetail extends React.Component {
 }
 const mapStateToProps = (state) => {
     return {
-        student: state.student
-
+        student: state.student,
+        editing: state.editing
     }
 }
-const mapDispatchToProps = (dispatch) => {
+
+const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         fetchStudentById: studentId => dispatch(action.fetchStudentById(studentId)),
+        deleteStudent: studentId => dispatch(action.deleteStudent(studentId, ownProps.history)),
+        editingToggle: () => dispatch(action.editing())
     };
 }
 
