@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as action from './../actions';
+import * as action from './../redux';
 import { withRouter, Link } from 'react-router-dom';
 import CampusForm from './CampusForm';
 import AssignCampus from './AssignCampus';
@@ -76,7 +76,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     fetchCampusById: campusId => dispatch(action.fetchCampusById(campusId)),
     fetchCurrentCampusStudents: campusId => dispatch(action.fetchCurrentCampusStudents(campusId)),
     deleteStudentFromCampus: studentId => dispatch(action.deleteStudentFromCampus(studentId, ownProps.history)),
-    editingToggle: () => dispatch(action.editing()),
+    editingToggle: () => dispatch(action.editingToggle()),
     assignStudent: (studentid, campusid) => dispatch(action.assignStudent(studentid, campusid)),
     writeStudentAssignment: student => dispatch(action.writeStudentAssignment(student)),
   };

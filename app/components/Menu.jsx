@@ -21,6 +21,6 @@ const Menu = () => {
     <div className="breadcrumbs"></div>
   </div>
   )
-
 }
+
 export default Menu;

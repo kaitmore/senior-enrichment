@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as action from './../actions';
+import * as action from './../redux';
 import { withRouter, Link } from 'react-router-dom';
 import StudentForm from './StudentForm';
 
@@ -51,11 +51,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         fetchStudentById: studentId => dispatch(action.fetchStudentById(studentId)),
-        deleteStudent: studentId => dispatch(action.deleteStudent(studentId, ownProps.history)),
-        editingToggle: () => dispatch(action.editing())
+        deleteStudent: (studentId, history) => dispatch(action.deleteStudent(studentId, ownProps.history)),
+        editingToggle: () => dispatch(action.editingToggle())
     };
 }
 
-
-// Use connect to put them together
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(StudentDetail));

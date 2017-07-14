@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as action from './../actions';
+import * as action from './../redux';
 import Card from './Card';
 
 class Campuses extends React.Component {
@@ -30,12 +30,12 @@ const mapStateToProps = (state, ownProps) => {
   return {
     campuses: state.campuses
   }
-};
+}
 
 const mapDispatchToProps = (dispatch) => {
   return {
     getCampuses: () => dispatch(action.fetchCampuses())
-  };
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Campuses);

@@ -7,43 +7,50 @@ const FETCH = 'FETCH_STUDENTS_SUCCESS';
 const FETCH_BY_ID = 'FETCH_STUDENT_BY_ID_SUCCESS';
 const WRITE = 'WRITE_STUDENT';
 const EDITING = 'EDITING';
-// const DELETE = 'DELETE_STUDENT_SUCCESS';
+const DELETE = 'DELETE_STUDENT_SUCCESS';
 
 /* ------------   ACTION CREATORS     ------------------ */
 const createStudentSuccess = student => ({ type: CREATE, student });
 const fetchStudentsSuccess = students => ({ type: FETCH, students });
 const fetchStudentByIdSuccess = student => ({ type: FETCH_BY_ID, student });
-const writeStudent = ({ name, email, campusId }) => ({ type: WRITE, name, email, campusId });
-const editing = () => ({ type: EDITING })
+const deleteStudentSuccess = () => ({ type: DELETE })
+export const writeStudent = ({ name, email, campusId }) => ({ type: WRITE, name, email, campusId });
+export const editingToggle = () => ({ type: EDITING })
 
-/* ------------       REDUCER     ------------------ */
-const initialState = {
-  students: [],
-  student: { campus: {} },
-  newStudent: {},
-  editing: false
-}
+/* ------------       REDUCERS    ------------------ */
 
-export default function reducer(state = initialState, action) {
-  const newState = Object.assign({}, state)
+export function students(state = [], action) {
   switch (action.type) {
     case CREATE:
-      newState.students = newState.students.concat(action.student)
-      return newState;
+      return [...state, action.student]
     case FETCH:
-      newState.students = action.students;
-      return newState;
+      return action.students;
+    default: return state
+  }
+}
+
+export function student(state = {}, action) {
+  switch (action.type) {
     case FETCH_BY_ID:
-      newState.student = action.student;
-      return newState;
-    case WRITE:
-      newState.newStudent.name = action.name;
-      newState.newStudent.email = action.email;
-      newState.newStudent.campusId = action.campusId;
-      return newState; // refactor use a spread operator
+      return action.student;
+    default: return state
+  }
+}
+
+export function newStudent(state = {}, action) {
+  switch (action.type) {
+    case WRITE: return action;
+    default: return state
+  }
+}
+
+export function editing(state = false, action) {
+
+  switch (action.type) {
     case EDITING:
-      newState.editing = !state.editing;
-      return newStaute
+      return !state
+    default: return state
+
   }
 }
 
@@ -88,3 +95,15 @@ export const updateStudent = (id, student) => dispatch => {
       throw (error);
     });
 };
+export const deleteStudent = (studentid, history) => (dispatch) => {
+  return axios.delete(`/api/students/${studentid}`)
+    .then(response => {
+      // Dispatch a synchronous action
+      // // to handle data
+      dispatch(deleteStudentSuccess())
+      history.push(`/students`)
+    })
+    .catch(error => {
+      throw (error);
+    })
+}

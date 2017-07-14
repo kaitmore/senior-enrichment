@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as action from './../actions';
+import * as action from './../redux';
 import { withRouter, Link } from 'react-router-dom';
 
 class StudentForm extends React.Component {
@@ -50,14 +50,18 @@ class StudentForm extends React.Component {
                         onChange={this.handleChange}
                         placeholder="Email"
                     />
-                    <select className="input-control" name="campusId" defaultValue={this.props.newStudent.campusId} onChange={this.handleChange} >
+                    <select className="input-control" name="campusId" value={this.props.newStudent.campusId} onChange={this.handleChange} >
+                        <option value={undefined} disabled selected hidden>Select Campus</option>
                         {this.props.campuses.map((campus, i) => {
                             return <option value={`${campus.id}`} key={i}>{campus.name}</option>
                         })}
                     </select>
 
                     <button className="card-btn" type="submit">Save</button>
-                    <Link to={cancelLink} onClick={() => this.props.editingToggle()} className="card-btn" >Cancel</Link>
+                    {console.log(this.props.match.path)}
+
+                    {this.props.match.path !== "/add-student" ? <Link to={cancelLink} onClick={() => this.props.editingToggle()} className="card-btn" >Cancel</Link>
+                        : ""}
 
                 </div>
             </form>
@@ -79,11 +83,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         fetchStudentById: studentId => dispatch(action.fetchStudentById(studentId)),
         writeStudent: updatedStudent => dispatch(action.writeStudent(updatedStudent)),
         createStudent: newStudent => dispatch(action.createStudent(newStudent, ownProps.history)),
-        editingToggle: () => dispatch(action.editing()),
+        editingToggle: () => dispatch(action.editingToggle()),
         updateStudent: (id, updatedStudent) => dispatch(action.updateStudent(id, updatedStudent))
     };
 }
 
-
-// Use connect to put them together
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(StudentForm));

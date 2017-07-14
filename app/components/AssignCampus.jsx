@@ -13,6 +13,7 @@ const AssignCampus = ({ students, campusid, studentAssignment, assignStudent, wr
   return (
     <form className="form-group" onSubmit={handleSubmit} id="assign-campus-form">
       <select className="dropdown" onChange={handleChange} className="input-control" name="studentCampus">
+            <option value={undefined} disabled selected hidden>Select Student</option>
         {students.map((student, i) => {
           return <option value={`${student.id}`} key={i}>{student.name}</option>
         })}

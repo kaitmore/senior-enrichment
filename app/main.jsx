@@ -13,9 +13,8 @@ import Students from './components/Students'
 import StudentDetail from './components/StudentDetail'
 import CampusDetail from './components/CampusDetail'
 
-import * as action from './actions';
+import * as action from './redux';
 import store from './store'
-
 
 store.dispatch(action.fetchStudents());
 store.dispatch(action.fetchCampuses());

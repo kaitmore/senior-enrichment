@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as action from './../actions';
+import * as action from './../redux';
 import { withRouter, Link } from 'react-router-dom';
 
 class CampusForm extends React.Component {
@@ -13,14 +13,16 @@ class CampusForm extends React.Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
+
+    // Handle either submitting an update, or creating a new campus
     if (this.props.editing) {
       this.props.updateCampus(this.props.currentCampusId, this.props.newCampus);
       this.props.fetchCampusById(this.props.currentCampusId);
       this.props.editingToggle()
-
     } else {
       this.props.createCampus(this.props.newCampus)
     }
+    
     this.props.writeCampus({})
   }
 
@@ -31,6 +33,7 @@ class CampusForm extends React.Component {
   }
 
   render() {
+
     let cancelLink = '';
     this.props.editing ? cancelLink = `/campuses/${this.props.campus.id}` : cancelLink = "/campuses";
 
@@ -47,7 +50,7 @@ class CampusForm extends React.Component {
           />
 
           <button className="card-btn" type="submit">Save</button>
-          <Link to={cancelLink} onClick={() => this.props.editingToggle()} className="card-btn" >Cancel</Link>
+          <Link to={cancelLink} onClick={() => this.props.editingToggle()} className="card-btn">Cancel</Link>
 
         </div>
       </form>
@@ -71,10 +74,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     fetchCampusById: campusId => dispatch(action.fetchCampusById(campusId)),
     writeCampus: name => dispatch(action.writeCampus(name)),
     createCampus: newCampus => dispatch(action.createCampus(newCampus, ownProps.history)),
-    editingToggle: () => dispatch(action.editing()),
+    editingToggle: () => dispatch(action.editingToggle()),
     updateCampus: (id, updatedCampus) => dispatch(action.updateCampus(id, updatedCampus)),
   }
 }
 
-// Use connect to put them together
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CampusForm));

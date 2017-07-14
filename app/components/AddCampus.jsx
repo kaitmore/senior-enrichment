@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-
-import { Button, Modal } from 'react-bootstrap';
-
 import CampusForm from './CampusForm'
 
 const AddCampus = () => {

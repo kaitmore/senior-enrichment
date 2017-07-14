@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as action from './../actions';
+import * as action from './../redux';
 import Card from './Card';
 
 class Students extends React.Component {
@@ -29,15 +29,13 @@ class Students extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        // You can now say this.props.students
         students: state.students
     }
 };
 const mapDispatchToProps = (dispatch) => {
     return {
         getStudents: () => dispatch(action.fetchStudents())
-    };
+    }
 }
 
-// Use connect to put them together
 export default connect(mapStateToProps, mapDispatchToProps)(Students);
